@@ -18,4 +18,6 @@ A estrutura básica do projeto foi disponibilzada no tutorial.<p>
 10 - More Templating</br>
 11 - Custom Filters</br>
 12 - Event Handlers</br>
-13 - REST and Custom Services
+13 - REST and Custom Services</br>
+
+<p>Para testar, basta executar <i>npm start</i>. Ele irá automaticamente baixar as dependências e levantar o projeto em <i>localhost:8000</i></p>
