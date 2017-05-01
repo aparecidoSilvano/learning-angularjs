@@ -1,0 +1,88 @@
+<html ng-app="listaTelefonica">
+    <head>
+        <title>Lista Telefonica</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="main.css">
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+
+        <script>
+            angular.module("listaTelefonica", []);
+            angular.module("listaTelefonica").controller("listaTelefonicaCtr", function($scope) {
+                $scope.appName = "Lista telefônica";
+                
+                $scope.contatos = [
+                    {
+                        nome: "josé",
+                        telefone: "8888 6666"
+                    }, {
+                        nome: "maria",
+                        telefone: "8888 7878"
+                    }
+                ];
+
+                $scope.operadoras = [
+                    {
+                        nome: "Oi",
+                        codigo: "86",
+                        categoria: "Celular"
+                    }, {
+                        nome: "Vivo",
+                        codigo: "91",
+                        categoria: "Celular"
+                    }, {
+                        nome: "Tim",
+                        codigo: "37",
+                        categoria: "Celular"
+                    }, {
+                        nome: "GVT",
+                        codigo: "25",
+                        categoria: "Fixo"
+                    }, {
+                        nome: "Embratel",
+                        codigo: "21",
+                        categoria: "Fixo"
+                    }
+                ];
+
+                $scope.addContato = function(contato) {
+                    $scope.contatos.push(contato);
+                    delete $scope.contato;
+                };        
+            });
+
+        </script>
+
+    </head>
+    <body ng-controller="listaTelefonicaCtr">
+        <div class="container jumbotron">
+            <h3 ng-bind="appName"></h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                         <th>Operadora</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="contato in contatos">
+                        <td ng-bind="contato.nome"></td>
+                        <td ng-bind="contato.telefone"></td>
+                        <td ng-bind="contato.operadora.nome"></td>
+                    </tr>
+                </tbody>
+            </table>    
+            <input class="form-control" type="text" ng-model="contato.nome" placeholder="Nome"/>
+            <input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone"/>
+            <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+                <option value="">Selecione uma operadora</option>
+            </select>
+            <button class="btn btn-primary btn-block" ng-click="addContato(contato)" 
+                ng-disabled="!contato.nome || !contato.telefone">Adicionar contato</button>
+        </div>
+    </body>
+</html>
